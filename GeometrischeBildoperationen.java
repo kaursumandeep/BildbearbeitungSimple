@@ -39,6 +39,7 @@ public class GeometrischeBildoperationen  extends Bildoperationen
             case OP_SpiegelHorizontal: return spiegelHorizontal(originalbild);
             case OP_SpiegelVertikal: return spiegelVertikal(originalbild);
             case OP_DreheLinks: return dreheLinks(originalbild);
+            case OP_DreheRehcts : return dreheRechts( originalbild);
             default: return originalbild.copy();
         }
     }
@@ -121,7 +122,47 @@ public class GeometrischeBildoperationen  extends Bildoperationen
     }
     
     private PImage dreheLinks( PImage originalbild ){
-        return originalbild.copy();
+        int breite = originalbild.height;
+        int hoehe  = originalbild.width;
+
+        int[][] pixel = pixelsExplode(originalbild.pixels, breite,hoehe);
+        int[][] pixelNeu = new int[hoehe][breite];
+
+        for(int x=0; x < hoehe; x++) {
+            for(int y=0;y < breite; y++) {
+                pixelNeu[x][y] = pixel[(breite-1)-y][x];
+            }
+        }
+        PImage neuesBild = originalbild.copy();
+        neuesBild.pixels= pixelsFlatten(pixelNeu); 
+        return neuesBild;
+        
+        
     }
     
+    public void dreheRechts( Picture origianlbild){
+        this.op = OP_DreheRechts;
+        originalbild.run0p( this );
+    }
+    
+    private PImage dreheRechts( PImage origianlbild ){
+        int breite = originalbild.height;
+        int hoehe  = originalbild.width;
+
+        int[][] pixel = pixelsExplode(originalbild.pixels, breite,hoehe);
+        int[][] pixelNeu = new int[hoehe][breite];
+
+        for(int x=0; x < hoehe; x++) {
+            for(int y=0;y < breite; y++) {
+                pixelNeu[x][y] = pixel[(breite1)+y][x];
+            }
+        }
+        PImage neuesBild = originalbild.copy();
+        neuesBild.pixels= pixelsFlatten(pixelNeu); 
+        return neuesBild;
+    }
+    }
 }
+
+    
+
