@@ -105,7 +105,7 @@ public class GeometrischeBildoperationen  implements Bildoperation
         neuesBild.setPixelsArray(pixelNeu); 
         return neuesBild;
     }
-   
+     
     /**
      * Dreht ein Bild um 90 Grad gegen den Uhrzeigersinn
      *
@@ -113,8 +113,8 @@ public class GeometrischeBildoperationen  implements Bildoperation
      * @return Eine um 90 Grad gegen den Uhrzeigersinn gedrehte Kopie des Bildes
      */
     public Picture dreheLinks( Picture originalBild) {
-        int breite = originalBild.getHeight();
-        int hoehe  = originalBild.getWidth();
+        int breite = originalBild.getWidth();
+        int hoehe  = originalBild.getHeight();
 
         int[][] pixel = originalBild.getPixelsTable();
         int[][] pixelNeu = new int[hoehe][breite];
@@ -125,8 +125,22 @@ public class GeometrischeBildoperationen  implements Bildoperation
             }
         }
         Picture neuesBild = originalBild.copy();
+        neuesBild.setDimensions(hoehe,breite);
         neuesBild.setPixelsArray(pixelNeu); 
         return neuesBild;
     }
 
-}
+      public picture faltung(Picture originalbild, double [][] filter){
+          int lange= filter.length;
+          int halb=lange/2;
+          
+          color [][] pixel=originalBild.getPixelsTableColor();
+          color [][] pixelNeu= new Color [breite][hoehe];
+          for (int x=halb ; x< originalBild.getWidth()-halb;x++){
+              for (int y= halb ; y> originalBild.getHeight()-halb;y++){
+          }
+      }
+    
+    
+    
+ }
