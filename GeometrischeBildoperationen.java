@@ -1,4 +1,6 @@
 import java.util.Random;
+import javafx.scene.paint.Color;
+
 
 /**
  * Algorithmen zur Änderung der Pixelpositionen eines Pictures
@@ -20,7 +22,7 @@ public class GeometrischeBildoperationen  implements Bildoperation
     public static final int OP_DreheLinks = 3;
     public static final int OP_DreheRechts = 4;
     public static final int OP_Drehe180 = 5;
-
+    public static final int OP_faltung= 6;
     // ID der aktuell aktiven geometrischen Operation.
     private int op = OP_Nil;
 
@@ -131,20 +133,22 @@ public class GeometrischeBildoperationen  implements Bildoperation
     }
 
       public Picture faltung(Picture originalbild, double [][] filter){
-          int lange= filter.length;
-          int halb=lange/2;
+        int breite = originalbild.getWidth();
+        int hoehe  = originalbild.getHeight();
+          int laenge= filter.length;
+          int halb=laenge/2;
           
-          Color [][] pixel = originalBild.getPixelsTableColor();
+          Color [][] pixel = originalbild.getPixelsColorTable();
           Color [][] pixelNeu = new Color[breite][hoehe];
           
           for (int x = halb ; x < originalbild.getWidth()-halb;x++){
-              for (int y = halb ; y > originalbild.getHeight()-halb;y++){
+               for (int y = halb ; y > originalbild.getHeight()-halb;y++){
                   int xx = x - halb;
                   int yy = y - halb;
                   double rot = 0.0;
                   double gruen =0.0;
                   double blau = 0.0;
-                  for (int i = 0; i < laenge; i++){
+                  for (int i = 0; i <laenge; i++){
                     for (int j = 0; j <laenge; j++){
                         rot += filter[i][j] * pixel[xx+i][yy+j].getRed();
                         gruen += filter[i][j] * pixel[xx+i][yy+j].getGreen();
@@ -161,11 +165,11 @@ public class GeometrischeBildoperationen  implements Bildoperation
       if (blau < 0.0) blau = 0.0;
       if (blau > 1.0) blau = 1.0;
       
-      pixelNeu[x][y]= new Color ( rot, gruen, blau, 1.0);
+      pixelNeu[x][y]= new Color (rot,gruen,blau,1.0 );
     }
 }
-      Picture neuesBild = originalBild.copy();
-      neuesBild.setPixels(pixelNeu);
+      Picture neuesBild = originalbild.copy();
+      neuesBild.setPixelsArray(pixelNeu);
       return neuesBild;
     }
 }
